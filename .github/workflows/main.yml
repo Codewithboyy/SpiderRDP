@@ -98,6 +98,15 @@ jobs:
           }
           Write-Host "TCP connectivity successful!"
 
+      - name: Backup Important Data
+        if: always()  # Run even if workflow fails
+        run: |
+          # Compress your important data
+          Compress-Archive -Path "C:\your-data-folder\*" -DestinationPath "$env:GITHUB_WORKSPACE\backup.zip"
+    
+          # Or upload to cloud storage
+          # Or commit to repository temporarily
+
       - name: Maintain Connection
         run: |
           Write-Host "`n=== RDP ACCESS ==="
